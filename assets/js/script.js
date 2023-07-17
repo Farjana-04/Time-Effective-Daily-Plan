@@ -1,6 +1,31 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+// var headerDate = document.querySelector("#currentDay");
+//Added code to display the current date in the header of the page
+var today = dayjs();
+$('#currentDay').text(today.format('dddd, MMM DD YYYY'));
+// $('#currentDay').moment().format('MMM D, YYYY');
+
+let times = [9,10,11,12,13,14,15,16,17]
+$(function () {
+  for(let timeIndex = 9;timeIndex<=17;timeIndex++){
+
+    let timeBlockEl =$(`#hour-${timeIndex}`)
+    console.log(timeBlockEl)
+   
+    let buttonEl =timeBlockEl.children(".saveBtn")
+   
+    buttonEl.on("click",clickSave)
+    //Get current number of hours
+    let timeText = localStorage.getItem(`hour-${timeIndex}`)
+    let textAreaEl = timeBlockEl.children(".description")
+    console.log(timeText)
+    textAreaEl.val(timeText)
+
+    //if timeBlockHour is same as curent real-time hour
+    // set the class to present
+  }
 
 
   // TODO: Add a listener for click events on the save button. This code should
@@ -21,6 +46,18 @@
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
+
+});
+
+// let clickSave = (e)=>{
+
+//  let clickedBtn =$(e.currentTarget)
+//   let timeBlockEl =clickedBtn.parent()
+//   let hourEl =timeBlockEl.children(".hour")
+//   let textAreaEl =timeBlockEl.children(".description")
+//   console.log(timeBlockEl.attr("id"))
+//   console.log(textAreaEl.val())
+// }
 
 
 
