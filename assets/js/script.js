@@ -1,31 +1,64 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-// var headerDate = document.querySelector("#currentDay");
+
 //Added code to display the current date in the header of the page
-var today = dayjs();
-$('#currentDay').text(today.format('dddd, MMM DD YYYY'));
+var currentDay = dayjs();
+$('#currentDay').text(currentDay.format('dddd, MMM DD YYYY'));
 // $('#currentDay').moment().format('MMM D, YYYY');
 
 let times = [9,10,11,12,13,14,15,16,17]
 $(function () {
-  for(let timeIndex = 9;timeIndex<=17;timeIndex++){
+  for(let timeIndex = 9; timeIndex<=17; timeIndex++){
 
     let timeBlockEl =$(`#hour-${timeIndex}`)
-    console.log(timeBlockEl)
+    // console.log(timeBlockEl)
    
     let buttonEl =timeBlockEl.children(".saveBtn")
-   
+   // used on() instead of event listener for click events on the save button
     buttonEl.on("click",clickSave)
-    //Get current number of hours
-    let timeText = localStorage.getItem(`hour-${timeIndex}`)
-    let textAreaEl = timeBlockEl.children(".description")
-    console.log(timeText)
-    textAreaEl.val(timeText)
 
+    //Get current number of hours
+     let timeText = localStorage.getItem(`time-${timeIndex}`)
+    let textAreaEl = timeBlockEl.children(".description")
+      console.log(timeText)
+     textAreaEl.val(timeText)
+  }
     //if timeBlockHour is same as curent real-time hour
     // set the class to present
-  }
+    
+
+//function to check each hour block to see if it is past (gray), present (red), or future (green).
+
+// $(".time-block").each(function () {
+//   var blockHourId = parseInt($(this).attr("id").split("hour")[1]);
+
+//   if (blockHourId === currentHour) {
+//     $(this).next().addClass("present");
+//   } else if (blockHourId < currentHour) {
+//     $(this).next().addClass("past");
+//   } else if (blockHourId > currentHour) {
+//     $(this).next().addClass("future");
+//   }
+// });
+  
+  // Save data in local storage
+  // Get nearby values of the description in JQuery
+  // var textAreaEl = $(this).children(".description").val();
+  // var timeBlockEl = $(this).parent().attr("id");
+
+// Save text in local storage
+   let timeText = localStorage.setItem(`hour-${timeIndex}`)
+   let textAreaEl = timeBlockEl.children(".description")
+    localStorage.setItem(timeText, textAreaEl);
+  
+  
+
+  // console.log(timeTextSave)
+  // let textAreaEl = timeBlockEl.children(".description")
+  // console.log(timeText)
+  // textAreaEl.val(timeText)
+  // console.log(localStorage.getItem());
 
 
   // TODO: Add a listener for click events on the save button. This code should
@@ -49,15 +82,16 @@ $(function () {
 
 });
 
-// let clickSave = (e)=>{
+let clickSave = (e)=>{
 
-//  let clickedBtn =$(e.currentTarget)
-//   let timeBlockEl =clickedBtn.parent()
-//   let hourEl =timeBlockEl.children(".hour")
-//   let textAreaEl =timeBlockEl.children(".description")
-//   console.log(timeBlockEl.attr("id"))
-//   console.log(textAreaEl.val())
-// }
+ let clickedBtn =$(e.currentTarget)
+ console.log(e.currentTarget)
+  let timeBlockEl =clickedBtn.parent()
+  let hourEl =timeBlockEl.children(".hour")
+  let textAreaEl =timeBlockEl.children(".description")
+  console.log(timeBlockEl.attr("id"))
+  console.log(textAreaEl.val())
+}
 
 
 
