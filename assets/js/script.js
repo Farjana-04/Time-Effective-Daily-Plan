@@ -28,19 +28,19 @@ $(function () {
     // set the class to present
     
 
-//function to check each hour block to see if it is past (gray), present (red), or future (green).
+//function to check each hour block to style different time blocks according to their status: past, present, or future. 
+let currentHour = dayjs().hour();
+$(".time-block").each(function () {    //selects all elements with the class "time-block" and iterates over each of them using the .each() method.
+  var blockHourId = parseInt($(this).attr("id").split("hour")[1]);
 
-// $(".time-block").each(function () {
-//   var blockHourId = parseInt($(this).attr("id").split("hour")[1]);
-
-//   if (blockHourId === currentHour) {
-//     $(this).next().addClass("present");
-//   } else if (blockHourId < currentHour) {
-//     $(this).next().addClass("past");
-//   } else if (blockHourId > currentHour) {
-//     $(this).next().addClass("future");
-//   }
-// });
+  if (blockHourId === currentHour) {
+    $(this).next().addClass("present");
+  } else if (blockHourId < currentHour) {
+    $(this).next().addClass("past");
+  } else if (blockHourId > currentHour) {
+    $(this).next().addClass("future");
+  }
+});
   
   // Save data in local storage
   // Get nearby values of the description in JQuery
