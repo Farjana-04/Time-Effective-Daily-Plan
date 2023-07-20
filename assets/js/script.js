@@ -26,24 +26,26 @@ $(function () {
     
   //function to check each hour block to style different time blocks according to their status: past, present, or future. 
  let currentHour = dayjs().hour();
+ console.log(currentHour)
  $(".time-block").each(function () {    //selects all elements with the class "time-block" and iterates over each of them using the .each() method.
   var blockHourId = parseInt($(this).attr("id").split("hour-")[1]);
+  console.log(currentHour, blockHourId)
   //  console.log(currentHour)
   //  console.log(blockHourId)
   if (blockHourId === currentHour) {
-    $(this).next().addClass("present");
-    $(this).next().removeClass("past");
-    $(this).next().removeClass("future");
+    $(this).addClass("present");
+    $(this).removeClass("past");
+    $(this).removeClass("future");
 
   } else if (blockHourId < currentHour) {
-    $(this).next().removeClass("present");
-    $(this).next().addClass("past");
-    $(this).next().removeClass("future");
+    $(this).removeClass("present");
+    $(this).addClass("past");
+    $(this).removeClass("future");
     
   } else if (blockHourId > currentHour) {
-    $(this).next().removeClass("present");
-    $(this).next().removeClass("past");
-    $(this).next().addClass("future");
+    $(this).removeClass("present");
+    $(this).removeClass("past");
+    $(this).addClass("future");
   }
 });
  
